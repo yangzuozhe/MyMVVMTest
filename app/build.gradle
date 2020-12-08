@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        applicationId "com.example.mymvvmtest"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    def lifecycle_version = "2.2.0"
+    def arch_version = "2.1.0"
+
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    // LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    // Lifecycles only (without ViewModel or LiveData)//只有生命周期(没有ViewModel或LiveData)
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    // Saved state module for ViewModel//为ViewModel保存状态模块
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
+    // Annotation processor//注解处理器
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // alternately - if using Java8, use the following instead of lifecycle-compiler//或者——如果使用Java8，使用以下工具代替生命周期编译器
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
+// optional - helpers for implementing LifecycleOwner in a Service//可选—在服务中实现LifecycleOwner的助手
+    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
+    // optional - ProcessLifecycleOwner provides a lifecycle for the whole application process//可选- ProcessLifecycleOwner提供了整个应用程序过程的生命周期
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData//可选-对LiveData的ReactiveStreams支持
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+    // optional - Test helpers for LiveData//可选—为LiveData测试helper
+    testImplementation "androidx.arch.core:core-testing:$arch_version"
+
+
+}
